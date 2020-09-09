@@ -52,7 +52,7 @@ class Pegawai extends ResourceController
             'homebase' => $this->request->getVar('homebase'),
         ];
         // cek validation
-        if (!$validation->run($data, 'pegawai')) {
+        if (!$validation->run($data, 'pegawai_insert')) {
             $response = [
                 'status' => 500,
                 'error' => true,

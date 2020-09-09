@@ -14,4 +14,33 @@ $(document).ready(function () {
         })
     }
     getAll();
+
+    // add pegawai 
+
+    $("#tambahPegawai").click(function () {
+        let sNama = $("#nama").val();
+        let sNip = $("#nip").val();
+        let sKantor = $("#kantor").val();
+        let sHomebase = $("#homebase").val();
+        
+        $.ajax({
+            url: '/pegawai/create',
+            method: "POST",
+            data: {
+                nama : sNama,
+                nip : sNip,
+                kantor : sKantor,
+                homebase : sHomebase
+            },
+            success: function (data) {
+                getAll();
+            },
+            statusCode: {
+                500: function() {
+                  $('#error-status').html('<span>Error pak</span>');
+                }
+              }
+        })
+    })
+
 });

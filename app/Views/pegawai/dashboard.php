@@ -14,23 +14,48 @@
 
 <body>
   <div class="container">
-    <div class="row mt-2">
-    <table class="table table-striped table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Nama</th>
-        <th scope="col">NIP</th>
-        <th scope="col">Kantor</th>
-        <th scope="col">Homebase</th>
-      </tr>
-    </thead>
-    <tbody id="dataPegawai">
 
-    </tbody>
-  </table>
+
+    <div class="row mt-2">
+      <form action="#">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nama</label>
+          <input type="text" class="form-control" id="nama" name="" value="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">NIP</label>
+          <input type="text" class="form-control" id="nip" name="" value="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Kantor</label>
+          <input type="text" class="form-control" id="kantor" name="" value="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Homebase</label>
+          <input type="text" class="form-control" id="homebase" name="" value="">
+        </div>
+        <input type="button" class="btn btn-primary" value="Tambah" id="tambahPegawai"> 
+      </form>
+      <div id="error-status"></div>
+    </div>
+
+
+    <div class="row mt-2">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Nama</th>
+            <th scope="col">NIP</th>
+            <th scope="col">Kantor</th>
+            <th scope="col">Homebase</th>
+          </tr>
+        </thead>
+        <tbody id="dataPegawai">
+        </tbody>
+      </table>
     </div>
   </div>
-  
+
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
