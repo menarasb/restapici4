@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\PegawaiModel;
+use CodeIgniter\RESTful\ResourceController;
 
 class Pegawai extends ResourceController
 {
-    protected $format    = 'json';
+    protected $format = 'json';
     protected $pegawaiModel;
 
     public function __construct()
@@ -25,17 +25,17 @@ class Pegawai extends ResourceController
         return $this->respond($response, 200);
     }
 
-    public function show($id = NULL)
+    public function show($id = null)
     {
         $data = $this->pegawaiModel->getPegawai($id);
         if (!$data) {
             $response = [
                 'message' => 'data tidak ditemukan',
-                'status' => 400
+                'status' => 400,
             ];
         } else {
             $response = [
-                'data' => $data
+                'data' => $data,
             ];
         }
         return $this->respond($response, 200);
@@ -49,57 +49,57 @@ class Pegawai extends ResourceController
             'nama' => $this->request->getVar('nama'),
             'nip' => $this->request->getVar('nip'),
             'kantor' => $this->request->getVar('kantor'),
-            'homebase' => $this->request->getVar('homebase')
+            'homebase' => $this->request->getVar('homebase'),
         ];
         // cek validation
         if (!$validation->run($data, 'pegawai')) {
             $response = [
                 'status' => 500,
                 'error' => true,
-                'data' => $validation->getErrors()
+                'data' => $validation->getErrors(),
             ];
             return $this->respond($response, 500);
         } else {
 
-            $result =  $this->pegawaiModel->addPegawai($data);
+            $result = $this->pegawaiModel->addPegawai($data);
             if ($result) {
                 $response = [
-                    'message' => 'data berhasil ditambahkan'
+                    'message' => 'data berhasil ditambahkan',
                 ];
                 return $this->respond($response, 200);
             }
         }
     }
 
-    public function update($id = NULL)
+    public function update($id = null)
     {
         $validation = \Config\Services::validation();
         $data = [
             'nama' => $this->request->getVar('nama'),
             'nip' => $this->request->getVar('nip'),
             'kantor' => $this->request->getVar('kantor'),
-            'homebase' => $this->request->getVar('homebase')
+            'homebase' => $this->request->getVar('homebase'),
         ];
         $niplama = $this->pegawaiModel->getPegawai($id);
-        if($niplama['nip'] == $this->request->getVar('nip')){
+        if ($niplama['nip'] == $this->request->getVar('nip')) {
             $valid = $validation->run($data, 'pegawai_update');
         } else {
             $valid = $validation->run($data, 'pegawai_insert');
         }
-        
+
         // cek validation
         if (!$valid) {
             $response = [
                 'status' => 500,
                 'error' => true,
-                'data' => $validation->getErrors()
+                'data' => $validation->getErrors(),
             ];
             return $this->respond($response, 500);
         } else {
-            $result =  $this->pegawaiModel->updatePegawai($data, ['id' => $id]);
+            $result = $this->pegawaiModel->updatePegawai($data, ['id' => $id]);
             if ($result) {
                 $response = [
-                    'message' => 'data berhasil diupdate'
+                    'message' => 'data berhasil diupdate',
                 ];
                 return $this->respond($response, 200);
             }
@@ -108,18 +108,17 @@ class Pegawai extends ResourceController
 
     public function delete($id = null)
     {
-        if($this->pegawaiModel->delete($id))
-        {
+        if ($this->pegawaiModel->delete($id)) {
             $response = [
                 'status' => 500,
                 'error' => false,
-                'message' => 'data berhasil di hapus'
+                'message' => 'data berhasil di hapus',
             ];
         } else {
             $response = [
                 'status' => 200,
                 'error' => true,
-                'message' => 'data gagal dihapus'
+                'message' => 'data gagal dihapus',
             ];
         }
         return $this->respond($response);
